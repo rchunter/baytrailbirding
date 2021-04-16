@@ -10,7 +10,25 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_021910) do
+ActiveRecord::Schema.define(version: 2021_04_16_054000) do
+
+  create_table "birds", force: :cascade do |t|
+    t.text "speciesCode"
+    t.text "comName"
+    t.text "sciName"
+    t.text "locId"
+    t.text "locName"
+    t.text "obsDt"
+    t.integer "howMany"
+    t.float "lat"
+    t.float "lng"
+    t.boolean "obsValid"
+    t.boolean "obsReviewed"
+    t.boolean "locationPrivate"
+    t.text "subId"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "facilities", force: :cascade do |t|
     t.text "name"
