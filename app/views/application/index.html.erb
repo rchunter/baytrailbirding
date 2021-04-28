@@ -121,7 +121,7 @@
       });
 
       var bird_data = null;
-      var bird_images = null;
+      
       var mymap = L.map('mapid').setView([37.42, -121.91], 13);
       L.tileLayer('https://{s}.tile.thunderforest.com/outdoors/{z}/{x}/{y}.png?apikey={apikey}', {
           attribution: '&copy; <a href="http://www.thunderforest.com/">Thunderforest</a>, &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
@@ -129,11 +129,11 @@
           maxZoom: 22
        }).addTo(mymap);
 
-      function setContent(birddata,imgsrc,elem){
+      function setContent(birddata,elem){
         $(elem).empty();
         $(elem).append(
           `
-          <img class="card-img-top" src="${imgsrc}">
+          <img class="card-img-top" src="${birddata.photoURL}">
           <div class="card-body">
             <h5 class="card-title">${birddata.comName}</h5>
             <h6 class="card-subtitle mb-2 text-muted">${birddata.sciName}</h6>
@@ -163,7 +163,6 @@
         );
         mymap.addLayer(marker);
         marker.bindPopup(`<b>${loc_data.name}</b><br/>${loc_data.description}.`).openPopup();
-        //marker.on('click', markerOnClick);
         return marker
       }
 
@@ -176,7 +175,7 @@
       }
       function markerOnClick(e){
         i = this.options.name.slice(-1);
-        setContent(bird_data[i],bird_images[i],$("#js-com_bird_info"));
+        setContent(bird_data[i],$("#js-com_bird_info"));
       }
 
       function createPos(form){
@@ -198,16 +197,13 @@
 
       }
       function hitEbirdEndpoint(pos, rare=false){
-        var settings = {"url": "/ebird",
+        var settings = {"url": "/bird",
                         "method": "POST",
                         "timeout": 0,
                         "data":{
                             "authenticity_token" : "<%= form_authenticity_token %>",
                             "lat": pos.coords.latitude,
                             "lng": pos.coords.longitude,
-                            "rare":rare,
-                            "num_req":100,
-                            "num_ret":10
                             }
                         }
         $.ajax(settings).done(function (response) {
@@ -217,11 +213,10 @@
 
           }else{
             markers = []
-            bird_data = response.birddata;
-            bird_images = response.imgsrc;
+            bird_data = response.bird_data;
             var arrayLength = bird_data.length;
             for (var i = 0; i < arrayLength; i++) {
-              setContent(bird_data[i],bird_images[i],$("#js-com_bird_info"));
+              setContent(bird_data[i],$("#js-com_bird_info"));
               markers.push(setMarker(bird_data[i],i))
             }
             var group = new L.featureGroup(markers);

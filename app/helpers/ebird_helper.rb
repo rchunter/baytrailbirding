@@ -82,32 +82,37 @@ module EbirdHelper
   end
 
 
-  def getImageSrc(bird_data)
-    img_src = 'never set'
-    begin
-      img_src = getImageFromName(bird_data["comName"])
-    rescue NoMethodError => e1
-      puts e1
-      begin
-        img_src = getImageFromName(bird_data["sciName"])
-      rescue NoMethodError => e2
-        puts e2
-        img_src = nil
+  def getImageSrc(birds)
+    com_names = birds.map{|bird| bird["comName"]}
+    sci_names = birds.map{|bird| bird["sciName"]}
+    images = getImageFromNames(com_names)
+    indexes_to_retry = []
+    images.each_with_index do |image, index|
+      if image.nil?
+        indexes_to_retry.append(index)
       end
     end
-    return img_src
+    if indexes_to_retry.length > 0
+      sci_names_to_retry = indexes_to_retry.map{|index| sci_names[index]};
+      two_try_src = getImageFromNames(sci_names_to_retry);
+      indexes_to_retry.each_with_index do |value, index|
+        images[value] = two_try_src[index]
+      end
+    end
+
+    return images
   end
 
 
 
-  def getImageFromName(name)
+  def getImageFromNames(names)
 
     wikimedia_params = {
       :action => "query",
       :prop => "pageimages",
       :format => "json",
       :piprop => "original",
-      :titles => name,
+      :titles => names.join("|"),
       :redirects => 1
     }
 
@@ -118,12 +123,23 @@ module EbirdHelper
 
     body = resp.body
     image_data = JSON.parse(body)
+    begin
+      image_pages = image_data["query"]["pages"]
+    rescue NoMethodError
+      return names.map{|name| nil}
+    end
+    image_srcs = []
+    image_pages.keys.each { |page_id|
+        begin
+          page = image_pages[page_id];
+          image_src = page["original"]["source"]
+          image_srcs.append(image_src)
+        rescue NoMethodError
+          image_srcs.append(nil)
+        end
+    }
 
-    image_pages = image_data["query"]["pages"]
-    first_page = image_pages[image_pages.keys[0]]
-    image_src = first_page["original"]["source"]
-
-    return image_src
+    return image_srcs
 
   end
 end

@@ -1,0 +1,140 @@
+---
+http_interactions:
+- request:
+    method: get
+    uri: https://en.wikipedia.org/w/api.php?action=query&format=json&piprop=original&prop=pageimages&redirects=1&titles=%7C%7C%7C
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 17 Mar 2021 19:02:20 GMT
+      server:
+      - mw1358.eqiad.wmnet
+      x-content-type-options:
+      - nosniff
+      p3p:
+      - CP="See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P for more
+        info."
+      x-frame-options:
+      - SAMEORIGIN
+      content-disposition:
+      - inline; filename=api-result.json
+      vary:
+      - Accept-Encoding,Treat-as-Untrusted,X-Forwarded-Proto,Cookie,Authorization
+      cache-control:
+      - private, must-revalidate, max-age=0
+      x-request-id:
+      - YFJSPNjH1P5rBouLaMp8QwAAAI4
+      content-type:
+      - application/json; charset=utf-8
+      age:
+      - '0'
+      x-cache:
+      - cp4027 miss, cp4031 pass
+      x-cache-status:
+      - pass
+      server-timing:
+      - cache;desc="pass"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      set-cookie:
+      - WMF-Last-Access=17-Mar-2021;Path=/;HttpOnly;secure;Expires=Sun, 18 Apr 2021
+        12:00:00 GMT, WMF-Last-Access-Global=17-Mar-2021;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Sun,
+        18 Apr 2021 12:00:00 GMT, GeoIP=US:CA:Capitola:36.97:-121.95:v4; Path=/; secure;
+        Domain=.wikipedia.org
+      x-client-ip:
+      - 23.119.166.17
+      accept-ranges:
+      - bytes
+      content-length:
+      - '139'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"batchcomplete":"","query":{"pages":{"-1":{"title":"","invalidreason":"The
+        requested page title is empty or contains only the name of a namespace.","invalid":""}}}}'
+  recorded_at: Wed, 17 Mar 2021 19:02:20 GMT
+- request:
+    method: get
+    uri: https://en.wikipedia.org/w/api.php?action=query&format=json&piprop=original&prop=pageimages&redirects=1&titles=
+    body:
+      encoding: US-ASCII
+      string: ''
+    headers:
+      User-Agent:
+      - Faraday v1.3.0
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      date:
+      - Wed, 17 Mar 2021 19:02:21 GMT
+      server:
+      - mw1284.eqiad.wmnet
+      x-content-type-options:
+      - nosniff
+      p3p:
+      - CP="See https://en.wikipedia.org/wiki/Special:CentralAutoLogin/P3P for more
+        info."
+      x-frame-options:
+      - SAMEORIGIN
+      content-disposition:
+      - inline; filename=api-result.json
+      vary:
+      - Accept-Encoding,Treat-as-Untrusted,X-Forwarded-Proto,Cookie,Authorization
+      cache-control:
+      - private, must-revalidate, max-age=0
+      x-request-id:
+      - YFJSPUxSeqlDQfXOelIdMwAAAA8
+      content-type:
+      - application/json; charset=utf-8
+      age:
+      - '0'
+      x-cache:
+      - cp4031 miss, cp4031 pass
+      x-cache-status:
+      - pass
+      server-timing:
+      - cache;desc="pass"
+      strict-transport-security:
+      - max-age=106384710; includeSubDomains; preload
+      report-to:
+      - '{ "group": "wm_nel", "max_age": 86400, "endpoints": [{ "url": "https://intake-logging.wikimedia.org/v1/events?stream=w3c.reportingapi.network_error&schema_uri=/w3c/reportingapi/network_error/1.0.0"
+        }] }'
+      nel:
+      - '{ "report_to": "wm_nel", "max_age": 86400, "failure_fraction": 0.05, "success_fraction":
+        0.0}'
+      set-cookie:
+      - WMF-Last-Access=17-Mar-2021;Path=/;HttpOnly;secure;Expires=Sun, 18 Apr 2021
+        12:00:00 GMT, WMF-Last-Access-Global=17-Mar-2021;Path=/;Domain=.wikipedia.org;HttpOnly;secure;Expires=Sun,
+        18 Apr 2021 12:00:00 GMT, GeoIP=US:CA:Capitola:36.97:-121.95:v4; Path=/; secure;
+        Domain=.wikipedia.org
+      x-client-ip:
+      - 23.119.166.17
+      accept-ranges:
+      - bytes
+      content-length:
+      - '40'
+      connection:
+      - keep-alive
+    body:
+      encoding: ASCII-8BIT
+      string: '{"batchcomplete":""}'
+  recorded_at: Wed, 17 Mar 2021 19:02:20 GMT
+recorded_with: VCR 6.0.0

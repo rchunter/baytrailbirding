@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_03_08_021910) do
+ActiveRecord::Schema.define(version: 2021_04_05_041923) do
+
+  create_table "birds", force: :cascade do |t|
+    t.string "ebirdSpeciesCode"
+    t.string "comName"
+    t.string "sciName"
+    t.string "photoURL"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "facilities", force: :cascade do |t|
     t.text "name"
@@ -33,6 +42,19 @@ ActiveRecord::Schema.define(version: 2021_03_08_021910) do
     t.datetime "updated_at", precision: 6, null: false
     t.string "latitude"
     t.string "longitude"
+  end
+
+  create_table "sightings", force: :cascade do |t|
+    t.string "speciesCode"
+    t.string "locName"
+    t.datetime "obsDt"
+    t.integer "howMany"
+    t.float "lat"
+    t.float "lng"
+    t.boolean "notable"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["speciesCode", "obsDt", "lat", "lng", "howMany"], name: "sighting_index", unique: true
   end
 
 end
